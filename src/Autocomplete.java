@@ -297,6 +297,7 @@ public class Autocomplete {
          */
         protected Node myRoot;
 
+
         /**
          * Constructor method for TrieAutocomplete. Should initialize the trie
          * rooted at myRoot, as well as add all nodes necessary to represent the
@@ -340,8 +341,31 @@ public class Autocomplete {
          *             IllegalArgumentException if weight is negative.
          */
         private void add(String word, double weight) {
-            // TODO: Implement add
+            Node n, curr;
+            curr = myRoot;
+            char c;
 
+            for (int i = 0; i < word.length(); i++) {
+                c = word.charAt(i); 
+
+                if (curr.children.get(c) != null) {
+                    n = curr.children.get(c);
+                    if (weight > n.getWeight()) {
+                        n.setWeight(weight);
+                    }
+                }
+                else {
+                    n = new Node(c, myRoot, weight);
+                    curr.children.put(n.myInfo.charAt(0), n);
+                }
+
+                if (i == word.length() - 1) {
+                    n.setWord(word);
+                    n.isWord = true;
+                }
+                
+                curr = n;
+            }
             
         }
 
@@ -366,7 +390,7 @@ public class Autocomplete {
          *             NullPointerException if prefix is null
          */
         public Iterable<String> topMatches(String prefix, int k) {
-            // TODO: Implement topKMatches
+            // TODO: Implement topMatches
             return null;
         }
 
@@ -391,7 +415,6 @@ public class Autocomplete {
          * return 0.0
          */
         public double weightOf(String term) {
-            // TODO complete weightOf
             return 0.0;
         }
 

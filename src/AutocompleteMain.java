@@ -18,7 +18,7 @@ public class AutocompleteMain {
 	final static String TRIE_AUTOCOMPLETE = "Autocomplete$TrieAutocomplete";
 
 	/* Modify name of Autocompletor implementation as necessary */
-	final static String AUTOCOMPLETOR_CLASS_NAME = BRUTE_AUTOCOMPLETE;
+	final static String AUTOCOMPLETOR_CLASS_NAME = TRIE_AUTOCOMPLETE;
 
 	public static void main(String[] args) {
 		String filename = null;
@@ -37,7 +37,6 @@ public class AutocompleteMain {
 			SwingUtilities.invokeLater(new Runnable() {
 				public void run() {
 					new AutocompleteGUI(file.getAbsolutePath(), K, AUTOCOMPLETOR_CLASS_NAME).setVisible(true);
-					
 				}
 			});
 		}
