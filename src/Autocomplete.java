@@ -26,7 +26,6 @@ public class Autocomplete {
          *         being equal. If no such index exists, return -1 instead.
          */
         public static int firstIndexOf(Term[] a, Term key, Comparator<Term> comparator) {
-            // TODO: Implement firstIndexOf
             int beg = 0, end = a.length-1;
             int index = -1;
             while (beg <= end) {
@@ -54,7 +53,6 @@ public class Autocomplete {
          *         being equal. If no such index exists, return -1 instead.
          */
         public static int lastIndexOf(Term[] a, Term key, Comparator<Term> comparator) {
-            // TODO: Implement lastIndexOf
             int beg = 0, end = a.length-1;
             int index = -1;
             while (beg <= end) {
@@ -282,7 +280,6 @@ public class Autocomplete {
          * return 0.0
          */
         public double weightOf(String term) {
-            // TODO complete weightOf
             return 0.0;
         }
     }
@@ -291,6 +288,7 @@ public class Autocomplete {
      * 
      * @author Austin Lu
      * @author Jeff Forbes
+     * @author William Hendrix 
      */
     public static class TrieAutocomplete implements Autocompletor {
 
@@ -343,6 +341,8 @@ public class Autocomplete {
          */
         private void add(String word, double weight) {
             // TODO: Implement add
+
+            
         }
 
         /**

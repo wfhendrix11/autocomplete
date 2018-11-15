@@ -14,7 +14,6 @@ public class Node implements Comparable<Node> {
 	 * The character this Node represents
 	 */
 	String myInfo;
-//	String myWordThusFar;
 
 	/**
 	 * Whether or not this node represents the last character in a Node

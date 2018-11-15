@@ -37,6 +37,7 @@ public class AutocompleteMain {
 			SwingUtilities.invokeLater(new Runnable() {
 				public void run() {
 					new AutocompleteGUI(file.getAbsolutePath(), K, AUTOCOMPLETOR_CLASS_NAME).setVisible(true);
+					
 				}
 			});
 		}
