@@ -1,0 +1,6 @@
+5
+   3	all
+   2	bat
+   5	apes
+   1	ape
+   4	bay  

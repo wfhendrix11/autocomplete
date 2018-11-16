@@ -341,29 +341,37 @@ public class Autocomplete {
          *             IllegalArgumentException if weight is negative.
          */
         private void add(String word, double weight) {
+            char c;
             Node n, curr;
             curr = myRoot;
-            char c;
-
+            
+            if (myRoot.mySubtreeMaxWeight < weight) {
+                myRoot.mySubtreeMaxWeight = weight;
+            }
+            
             for (int i = 0; i < word.length(); i++) {
-                c = word.charAt(i); 
+                c = word.charAt(i);
 
-                if (curr.children.get(c) != null) {
-                    n = curr.children.get(c);
-                    if (weight > n.getWeight()) {
-                        n.setWeight(weight);
+                // if the node already exists, find it
+                if (curr.getChild(c) != null) {
+                    n = curr.getChild(c);
+                    if (weight > n.mySubtreeMaxWeight) { 
+                        n.mySubtreeMaxWeight = weight;
                     }
                 }
+                // if the node does not exist, make a new one
                 else {
-                    n = new Node(c, myRoot, weight);
+                    n = new Node(c, curr, -1);
                     curr.children.put(n.myInfo.charAt(0), n);
+                    n.mySubtreeMaxWeight = weight;
                 }
-
+                // set these if its a word node
                 if (i == word.length() - 1) {
+                    n.myWord = word;
                     n.setWord(word);
                     n.isWord = true;
+                    n.setWeight(weight);
                 }
-                
                 curr = n;
             }
             
