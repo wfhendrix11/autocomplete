@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Collections;
 import java.util.PriorityQueue;
+import java.util.Map;
 
 public class Autocomplete {
         /**
@@ -286,9 +287,9 @@ public class Autocomplete {
     /**
      * General trie/priority queue algorithm for implementing Autocompletor
      * 
+     * @author William Hendrix 
      * @author Austin Lu
      * @author Jeff Forbes
-     * @author William Hendrix 
      */
     public static class TrieAutocomplete implements Autocompletor {
 
@@ -344,6 +345,12 @@ public class Autocomplete {
             char c;
             Node n, curr;
             curr = myRoot;
+
+            if (word == null)
+                throw new NullPointerException("Word is null");
+
+            if (weight < 0)
+                throw new IllegalArgumentException("Weight is null");
             
             if (myRoot.mySubtreeMaxWeight < weight) {
                 myRoot.mySubtreeMaxWeight = weight;
@@ -398,8 +405,17 @@ public class Autocomplete {
          *             NullPointerException if prefix is null
          */
         public Iterable<String> topMatches(String prefix, int k) {
-            // TODO: Implement topMatches
-            return null;
+            ArrayList<String> result = new ArrayList<String>();
+
+            if (prefix == null)
+                throw new NullPointerException("Prefix is null");
+
+            
+
+            
+            
+
+            return result;
         }
 
         /**
@@ -408,14 +424,58 @@ public class Autocomplete {
          * 
          * @param prefix
          *            - the prefix the returned word should start with
-         * @return The word from with the largest weight starting with prefix, or an
+         * @return The word from which the largest weight starting with prefix, or an
          *         empty string if none exists
          * @throws a
          *             NullPointerException if the prefix is null
          */
         public String topMatch(String prefix) {
-            // TODO: Implement topMatch
-            return null;
+            String result = "";
+            char c;
+            Node n;
+            Node curr =  myRoot;
+            String s;
+
+            if (prefix == null)
+                throw new NullPointerException("Prefix is null");
+                
+            if (prefix == "")
+                return "";
+            
+            if (curr.getChild(prefix.charAt(0)) == null)
+                return "";
+
+            // find the prefix node
+            for (int i = 0; i < prefix.length(); i++) {
+                if (curr.getChild(prefix.charAt(i)) == null) {
+                    break;
+                }
+                curr = curr.getChild(prefix.charAt(i));
+                
+                if (curr.isWord)
+                  result = curr.myWord;
+            }
+            
+            if (curr.children.isEmpty())
+               return result;
+            
+            //Use the mySubtreeMaxWeight of the prefix node to navigate down the tree until you find
+            //the Node with the max weight
+            while (!curr.children.isEmpty()) {
+               for (Map.Entry<Character, Node> node : curr.children.entrySet()) {
+                  n = node.getValue();
+                  if (n.mySubtreeMaxWeight == curr.mySubtreeMaxWeight) {
+                     curr = n;
+                     if (n.isWord && n.myWeight == curr.mySubtreeMaxWeight) 
+                        result = n.myWord;
+                  }    
+               }
+            }
+            
+            
+            
+        
+        return result;
         }
 
         /**
