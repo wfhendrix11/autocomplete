@@ -409,7 +409,12 @@ public class Autocomplete {
 
             if (prefix == null)
                 throw new NullPointerException("Prefix is null");
-
+            
+            if (prefix == "")
+                return "";
+            
+            if (curr.getChild(prefix.charAt(0)) == null)
+                return "";
             
 
             
@@ -459,8 +464,7 @@ public class Autocomplete {
             if (curr.children.isEmpty())
                return result;
             
-            //Use the mySubtreeMaxWeight of the prefix node to navigate down the tree until you find
-            //the Node with the max weight
+            // nagivate down the tree until the lergest weight is found
             while (!curr.children.isEmpty()) {
                for (Map.Entry<Character, Node> node : curr.children.entrySet()) {
                   n = node.getValue();
@@ -470,12 +474,8 @@ public class Autocomplete {
                         result = n.myWord;
                   }    
                }
-            }
-            
-            
-            
-        
-        return result;
+            }            
+            return result;
         }
 
         /**
