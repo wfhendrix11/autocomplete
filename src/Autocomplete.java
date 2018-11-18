@@ -405,18 +405,28 @@ public class Autocomplete {
          *             NullPointerException if prefix is null
          */
         public Iterable<String> topMatches(String prefix, int k) {
+            Node currr;
             ArrayList<String> result = new ArrayList<String>();
+            PriorityQueue<Node> pq = new PriorityQueue<Node>(k, new Node.ReverseSubtreeMaxWeightComparator());
 
             if (prefix == null)
                 throw new NullPointerException("Prefix is null");
             
             if (prefix == "")
-                return "";
+                return result;
             
-            if (curr.getChild(prefix.charAt(0)) == null)
-                return "";
+            pq.add(myRoot.getChild(prefix.charAt(0)));
             
+            currr = pq.peek();
 
+            for (Node node: pq) {
+                currr = pq.peek();
+                for (Map.Entry<Character, Node> n : currr.children.entrySet()) {
+                     pq.add(n.getValue());                  
+                }
+                pq.remove();
+                
+            }
             
             
 
@@ -464,7 +474,7 @@ public class Autocomplete {
             if (curr.children.isEmpty())
                return result;
             
-            // nagivate down the tree until the lergest weight is found
+            // nagivate down the tree until the largest weight is found
             while (!curr.children.isEmpty()) {
                for (Map.Entry<Character, Node> node : curr.children.entrySet()) {
                   n = node.getValue();
