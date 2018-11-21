@@ -373,6 +373,7 @@ public class Autocomplete {
                     n.mySubtreeMaxWeight = weight;
                 }
                 // set these if its a word node
+                int wordLength = word.length();
                 if (i == word.length() - 1) {
                     n.myWord = word;
                     n.setWord(word);
@@ -405,28 +406,37 @@ public class Autocomplete {
          *             NullPointerException if prefix is null
          */
         public Iterable<String> topMatches(String prefix, int k) {
-            Node currr;
-            ArrayList<String> result = new ArrayList<String>();
+            Node curr;
             PriorityQueue<Node> pq = new PriorityQueue<Node>(k, new Node.ReverseSubtreeMaxWeightComparator());
-
+            PriorityQueue<Node> children = new PriorityQueue<Node>(k, new Node.ReverseSubtreeMaxWeightComparator());
+            PriorityQueue<Node> wordNodes = new PriorityQueue<Node>(k, new Node.ReverseSubtreeMaxWeightComparator());
+            ArrayList<String> result = new ArrayList<String>();
+            
             if (prefix == null)
                 throw new NullPointerException("Prefix is null");
             
             if (prefix == "")
                 return result;
             
-            pq.add(myRoot.getChild(prefix.charAt(0)));
-            
-            currr = pq.peek();
+            pq.add(myRoot);
 
-            for (Node node: pq) {
-                currr = pq.peek();
-                for (Map.Entry<Character, Node> n : currr.children.entrySet()) {
-                     pq.add(n.getValue());                  
-                }
-                pq.remove();
-                
-            }
+            for (int i = 0; i < pq.size(); i++) {
+               while (!pq.isEmpty()) {
+                  curr = pq.poll();
+                  
+                  if (curr.isWord)
+                     result.add(curr.myWord);
+                     
+                  for (Map.Entry<Character, Node> n : curr.children.entrySet()) {
+                     children.add(n.getValue());                  
+                  }
+               }
+               
+               for (Node child: children) {
+                  pq.add(child);
+               }
+               children.clear();
+            }                
             
             
 
