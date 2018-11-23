@@ -1,0 +1,16 @@
+14
+219812	Wal-Mart Stores
+191581	Exxon Mobil
+177260	General Motors
+162412	Ford Motor
+138718	Enron
+125913	General Electric
+112022	Citigroup
+ 99699	ChevronTexaco
+ 85866	Intl. Business Machines
+ 72944	Philip Morris
+ 67190	Verizon Communications
+ 62402	American Intl. Group
+ 61257	American Electric Power
+ 59503	Duke Energy
+ 

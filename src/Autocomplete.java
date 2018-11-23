@@ -379,6 +379,7 @@ public class Autocomplete {
                     n.setWord(word);
                     n.isWord = true;
                     n.setWeight(weight);
+                    System.out.println(n.toString() + " " + n.getWord());
                 }
                 curr = n;
             }
@@ -420,7 +421,7 @@ public class Autocomplete {
             
             pq.add(myRoot);
 
-            for (int i = 0; i < pq.size(); i++) {
+            for (int i = 0; i < 4 + 1; i++) {
                while (!pq.isEmpty()) {
                   curr = pq.poll();
                   
