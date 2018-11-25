@@ -62,7 +62,6 @@ public class Term implements Comparable<Term> {
          *            - Two Terms whose words are being compared
          */
         public int compare(Term v, Term w) {
-            // TODO: Implement compare
         	int vLength = v.getWord().length();
         	int wLength = w.getWord().length();
         	if (vLength < r || wLength < r) {
@@ -91,7 +90,6 @@ public class Term implements Comparable<Term> {
      */
     public static class ReverseWeightOrder implements Comparator<Term> {
         public int compare(Term v, Term w) {
-            // TODO: Implement ReverseWeightOrder.compare
             if (v.getWeight() < w.getWeight()) return 1;
             if (v.getWeight() > w.getWeight()) return -1;
             return 0;
@@ -106,7 +104,6 @@ public class Term implements Comparable<Term> {
      */
     public static class WeightOrder implements Comparator<Term> {
         public int compare(Term v, Term w) {
-            // TODO: Implement WeightOrder.compare
             if (v.getWeight() < w.getWeight()) return -1;
             if (v.getWeight() > w.getWeight()) return 1;
             return 0;

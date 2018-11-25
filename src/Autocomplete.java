@@ -297,6 +297,7 @@ public class Autocomplete {
          * Root of entire trie
          */
         protected Node myRoot;
+        int depth;
 
 
         /**
@@ -356,6 +357,9 @@ public class Autocomplete {
                 myRoot.mySubtreeMaxWeight = weight;
             }
             
+            if (depth < word.length()) 
+               depth = word.length();
+            
             for (int i = 0; i < word.length(); i++) {
                 c = word.charAt(i);
 
@@ -379,7 +383,6 @@ public class Autocomplete {
                     n.setWord(word);
                     n.isWord = true;
                     n.setWeight(weight);
-                    System.out.println(n.toString() + " " + n.getWord());
                 }
                 curr = n;
             }
@@ -421,15 +424,17 @@ public class Autocomplete {
             
             pq.add(myRoot);
 
-            for (int i = 0; i < 4 + 1; i++) {
+            for (int i = 0; i < depth + 1; i++) {
                while (!pq.isEmpty()) {
                   curr = pq.poll();
                   
-                  if (curr.isWord)
+                  if (curr.isWord && curr.myWord.startsWith(prefix)) {
                      result.add(curr.myWord);
+                  }
                      
                   for (Map.Entry<Character, Node> n : curr.children.entrySet()) {
-                     children.add(n.getValue());                  
+                     if (!curr.children.containsKey(n.getValue()))
+                        children.add(n.getValue());                  
                   }
                }
                
@@ -437,10 +442,10 @@ public class Autocomplete {
                   pq.add(child);
                }
                children.clear();
+               
+               if (result.size() >= k)
+                  return result.subList(0, k - 1);
             }                
-            
-            
-
             return result;
         }
 
