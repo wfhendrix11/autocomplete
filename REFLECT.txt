@@ -1,6 +1,6 @@
-Name: firstname lastname
-AUID: abc123
-Hours Spent: Give an exact (decimal) number here
-Consulted With: provide names or AUID of any students, TAs, or professors you consulted with on the assignment. If you did not consult with anyone, you must explicitly write NONE.
-Resources Used: Any books, papers, or online resources. If you did not use any outside resources, you must explicitly write NONE 
-Impressions: Your answer here
+Name: William Hendrix
+AUID: wfh0008
+Hours Spent: 15
+Consulted With: The only thing I used was the java library documentation
+Impressions: Honestly a good prject, it was a bit difficult at times and took a lot 
+of work, but overall I enjoyed it. 
