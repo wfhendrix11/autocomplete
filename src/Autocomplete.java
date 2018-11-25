@@ -344,8 +344,7 @@ public class Autocomplete {
          */
         private void add(String word, double weight) {
             char c;
-            Node n, curr;
-            curr = myRoot;
+            Node n, curr = myRoot;
 
             if (word == null)
                 throw new NullPointerException("Word is null");
@@ -418,9 +417,6 @@ public class Autocomplete {
             
             if (prefix == null)
                 throw new NullPointerException("Prefix is null");
-            
-            if (prefix == "")
-                return result;
             
             pq.add(myRoot);
 
